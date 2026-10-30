@@ -33,9 +33,6 @@ async def is_server_running():
 async def start_server():
 
     if not await is_server_running():
-        SP_VAL = os.environ["SERVER_PASS"]
-
-        SERVER_PASS = SP_VAL if SP_VAL is not None else "12345"
 
         ARGS = [
             "-nographics",
@@ -47,7 +44,7 @@ async def start_server():
             "-world",
             "Yorbjenheim",
             "-password",
-            SERVER_PASS,
+            os.environ.get("SERVER_PASS", default="12345"),
             "-savedir",
             "C:\\ValheimServerData",
             "-public",
