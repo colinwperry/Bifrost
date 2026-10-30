@@ -65,11 +65,6 @@ async def start_server():
             env=server_env,
         )
 
-        return process
-
-    else:
-        return
-
 
 async def stop_server():
     if await is_server_running():
