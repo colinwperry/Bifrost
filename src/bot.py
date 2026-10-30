@@ -58,7 +58,7 @@ async def start_server():
         server_env = os.environ.copy()
         server_env["SteamAppId"] = str(STEAM_APP_ID)
 
-        process = await asyncio.create_subprocess_exec(
+        await asyncio.create_subprocess_exec(
             SERVER_PATH,
             *ARGS,
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
