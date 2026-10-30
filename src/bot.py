@@ -81,16 +81,6 @@ async def stop_server():
         os.kill(target_pid, signal.CTRL_BREAK_EVENT)
 
 
-@bot.event
-async def on_ready():
-    print(f"Logged in as {bot.user}")
-
-
-# @bot.slash_command()
-# async def hello(ctx):
-#     await ctx.respond("Hello!")
-
-
 @bot.slash_command()
 async def start(ctx):
     global processing_command
