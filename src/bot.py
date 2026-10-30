@@ -80,42 +80,42 @@ async def stop_server():
 async def start(ctx):
     global processing_command
 
-    if not processing_command:
-        processing_command = True
-
-        try:
-            await ctx.respond("Beginning server bootup...")
-            await start_server()
-
-        except Exception as err:
-            with open("errlog.txt", "a") as file:
-                file.write(str(err))
-
-        processing_command = False
-
-    else:
+    if processing_command:
         await ctx.respond("Please do not spam commands.")
+        return
+    
+    processing_command = True
+
+    try:
+        await ctx.respond("Beginning server bootup...")
+        await start_server()
+
+    except Exception as err:
+        with open("errlog.txt", "a") as file:
+            file.write(str(err))
+
+    processing_command = False
 
 
 @bot.slash_command()
 async def stop(ctx):
     global processing_command
 
-    if not processing_command:
-        processing_command = True
-
-        try:
-            await ctx.respond("Shutting down the server...")
-            await stop_server()
-
-        except Exception as err:
-            with open("errlog.txt", "a") as file:
-                file.write(str(err))
-
-        processing_command = False
-
-    else:
+    if processing_command:
         await ctx.respond("Please do not spam commands.")
+        return
+    
+    processing_command = True
+
+    try:
+        await ctx.respond("Shutting down the server...")
+        await stop_server()
+
+    except Exception as err:
+        with open("errlog.txt", "a") as file:
+            file.write(str(err))
+
+    processing_command = False
 
 
 if __name__ == "__main__":
