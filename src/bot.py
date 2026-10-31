@@ -5,6 +5,7 @@ import subprocess
 
 import discord
 import psutil
+from discord.ext import commands
 from dotenv import load_dotenv
 
 SERVER_PATH = r"C:\Program Files (x86)\Steam\steamapps\common\Valheim dedicated server\valheim_server.exe"
@@ -74,6 +75,7 @@ async def stop_server():
 
 
 @bot.slash_command()
+@commands.has_role("Valheim Crew")
 async def start(ctx):
     global processing_command
 
@@ -87,14 +89,14 @@ async def start(ctx):
         await ctx.respond("Beginning server bootup...")
         await start_server()
 
-    except Exception as err:
-        with open("errlog.txt", "a") as file:
-            file.write(str(err))
+    except (OSError, subprocess.SubprocessError, psutil.Error, discord.HTTPException) as err:
+        await ctx.send(str(err))
 
     processing_command = False
 
 
 @bot.slash_command()
+@commands.has_role("Valheim Crew")
 async def stop(ctx):
     global processing_command
 
@@ -108,9 +110,8 @@ async def stop(ctx):
         await ctx.respond("Shutting down the server...")
         await stop_server()
 
-    except Exception as err:
-        with open("errlog.txt", "a") as file:
-            file.write(str(err))
+    except (OSError, subprocess.SubprocessError, psutil.Error, discord.HTTPException) as err:
+        await ctx.send(str(err))
 
     processing_command = False
 
