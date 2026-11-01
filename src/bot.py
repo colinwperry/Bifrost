@@ -28,7 +28,7 @@ async def is_server_running():
     stdout, _ = await validator.communicate()
     stdout_str = stdout.decode(errors="ignore")
 
-    return "valheim_server.exe".lower() in stdout_str.lower()
+    return "valheim_server.exe" in stdout_str.lower()
 
 
 async def start_server():
