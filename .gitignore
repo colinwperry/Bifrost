@@ -1,4 +1,3 @@
 # hides the sensitive and redundant stuff
 .env
 .venv/
-errlog.txt
